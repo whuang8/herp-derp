@@ -1,5 +1,5 @@
 var SerialPort = require('serialport');
-var serialPort = new SerialPort('/dev/cu.usbmodem1411', {
+var serialPort = new SerialPort('/dev/cu.usbmodem1441', {
   baudRate: 9600
 });
 
@@ -24,11 +24,10 @@ app.use(express.static('public'));
 io.on('connection', function(socket){
 	serialPort.on('data', function (data) {
   	var winner = data.toString('utf8');
-    console.log("Data IS: ");
-    console.log(data);
   	if(winner == 1) {
   		player1++;
   		socket.emit("player1", player1);
+      soundPlayer.play('sonne.wav', function(err){ /* Do nothing if err */ })
       if(player1 == winning_score) {
         soundPlayer.play('player1_wins.mp3', function(err){ /* Do nothing if err */ })
         socket.emit("playerOneWin");
@@ -42,6 +41,7 @@ io.on('connection', function(socket){
   	} else if(winner == 2) {
   		player2++;
   		socket.emit("player2", player2);
+      soundPlayer.play('sonne.wav', function(err){ /* Do nothing if err */ })
       if(player2 == winning_score) {
         soundPlayer.play('player2_wins.mp3', function(err){ /* Do nothing if err */ })
         socket.emit("playerTwoWin");
@@ -56,12 +56,10 @@ io.on('connection', function(socket){
   	}
 	});
 
-  socket.on('reset', function(msg){
-  	player1 = 0;
-  	player2 = 0;
-  });
-
   socket.on('start', function(msg) {
+    player1 = 0;
+    player2 = 0;
+    soundPlayer.play('start_game.mp3', function(err){ /* Do nothing if err */ })
     serialPort.write('s', function(err) {
       if (err) {
         return console.log('Error on write: ', err.message);
