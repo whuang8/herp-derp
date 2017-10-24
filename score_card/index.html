@@ -22,8 +22,15 @@
           0
         </p>
       </div>
+      <div class="winner-overlay">
+        <div class="overlay-content" id="playerOneWin">
+          <h1>Player 1 Wins!</h1>
+        </div>
+        <div class="overlay-content" id="playerTwoWin">
+          <h1>Player 2 Wins!</h1>
+        </div>
+      </div>
     </div>
-
 
     <button class="reset-btn" id="reset">Reset</button>
 
@@ -35,12 +42,24 @@
         $('#reset').click(function(){
           socket.emit('reset');
           $('.score').text('0');
+          $('.winner-overlay').css('opacity', '0');
+          $('#playerOneWin').hide();
+          $('#playerTwoWin').hide();
+          console.log('Reset?');
         });
         socket.on('player1', function(score){
           $('#player1 .score').text(score);
         });
         socket.on('player2', function(msg){
           $('#player2 .score').text(score);
+        });
+        socket.on('playerOneWin', function(score){
+          $('.winner-overlay').css('opacity', '0.9');
+          $('#playerOneWin').show();
+        });
+        socket.on('playerTwoWin', function(score){
+          $('.winner-overlay').css('opacity', '0.9');
+          $('#playerTwoWin').show();
         });
       });
     </script>
