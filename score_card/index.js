@@ -3,7 +3,9 @@ var serialPort = new SerialPort('/dev/cu.usbmodem1411', {
   baudRate: 9600
 });
 
-var app = require('express')();
+// var app = require('express')();
+const express = require('express');
+const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
@@ -15,6 +17,8 @@ var player2 = 0;
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+
+app.use(express.static('public'));
 
 io.on('connection', function(socket){
 	serialPort.on('data', function (data) {

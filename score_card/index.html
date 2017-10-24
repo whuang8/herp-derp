@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
     <div class="container">
@@ -33,6 +33,7 @@
     </div>
 
     <button class="reset-btn" id="reset">Reset</button>
+    <button class="reset-btn" id="reset">Start</button>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -50,7 +51,7 @@
         socket.on('player1', function(score){
           $('#player1 .score').text(score);
         });
-        socket.on('player2', function(msg){
+        socket.on('player2', function(score){
           $('#player2 .score').text(score);
         });
         socket.on('playerOneWin', function(score){
