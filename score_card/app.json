@@ -1,0 +1,22 @@
+{
+  "name": "Herp Derp Speed Game",
+  "description": "Web app to display score",
+  "website": "",
+  "repository": "https://github.com/whuang8/herp-derp",
+  "logo": "",
+  "success_url": "/",
+  "keywords": [
+    "node",
+    "express",
+    "socket.io",
+    "realtime",
+    "websocket"
+  ],
+  "scripts": {
+  },
+  "addons": [
+  ],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-nodejs"
+  }
+}
