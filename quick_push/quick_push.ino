@@ -94,8 +94,25 @@ void playRound() {
   }
 }
 
+char incomingByte;   // for incoming serial data
+char finish_condition;
+
 void loop() {
-  playRound();
+  if (Serial.available() > 0) {              
+    incomingByte = Serial.read();
+    if (incomingByte == 's') {
+      Serial.write('4');  
+
+      while(1) {
+        playRound();
+        finish_condition = Serial.read();
+        if (finish_condition == 'f') {
+          break;
+        }
+      }
+      
+    }
+  }
 }
 
 
